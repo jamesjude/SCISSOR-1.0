@@ -24,13 +24,6 @@ Key features:
 - seqkit (v2.3.0)
 - STAR (v2.7.10a)
 
-### Recommended Installation
-```bash
-conda create -n scissor python=3.8
-conda activate scissor
-conda install -c bioconda cutadapt seqkit star
-```
-
 ## 🚀 Quick Start
 ### Input Files
 1. Paired-end FASTQ files
