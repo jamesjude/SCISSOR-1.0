@@ -19,10 +19,10 @@ TOOL_PATHS = {
 }
 
 TOOL_PATHS = {
-    'cutadapt': "/share/public4/data/sunyf/miniconda3/envs/python38/bin/cutadapt",
-    'seqkit': "/share/public4/data/sunyf/miniconda3/envs/python38/bin/seqkit", 
-    'star': "/share/public4/data/sunyf/miniconda3/envs/python38/bin/STAR",
-    'python': "/share/public4/data/sunyf/miniconda3/envs/python38/bin/python3.8"
+    'cutadapt': "/path/to//cutadapt",
+    'seqkit': "/path/to/seqkit", 
+    'star': "/path/to/STAR",
+    'python': "/path/to/python3.8"
 }
 
 def create_sample_directories(work_dir: str, sample: str) -> Path:
@@ -43,8 +43,7 @@ def create_sample_directories(work_dir: str, sample: str) -> Path:
     
     return sample_dir
 
-def process_adapters(input_reads: str, output_dir: Path, 
-                    remove_seq: str = None, retain_seq: str = None) -> str:
+def process_adapters(input_reads: str, output_dir: Path) -> str:
     """Process sequencing reads with adapter removal and filtering.
     
     Args:
@@ -56,20 +55,6 @@ def process_adapters(input_reads: str, output_dir: Path,
     Returns:
         Path to processed FASTQ file
     """
-    processed_reads = input_reads
-    
-    # Sequence filtering pipeline
-    if remove_seq:
-        output_rm = output_dir / "reads.seqkit_rm.fastq"
-        cmd = f"{TOOL_PATHS['seqkit']} grep -s -i -j 10 -P -m 1 -p {remove_seq} -v -o {output_rm} {processed_reads}"
-        subprocess.run(cmd, shell=True, check=True)
-        processed_reads = output_rm
-
-    if retain_seq:
-        output_rt = output_dir / "reads.seqkit_rt.fastq"
-        cmd = f"{TOOL_PATHS['seqkit']} grep -s -i -j 10 -P -m 1 -p {retain_seq} -o {output_rt} {processed_reads}"
-        subprocess.run(cmd, shell=True, check=True)
-        processed_reads = output_rt
 
     # Adapter trimming
     output_cut = output_dir / "read.cutadapt.fastq"
