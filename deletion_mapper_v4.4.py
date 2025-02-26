@@ -1,7 +1,7 @@
 """
 Author: YF Sun
 Date: 2024-06-05
-Description: Sequence Mapping and Deletion Analysis Pipeline
+Description: CRISPR Sequence Mapping and Deletion Analysis Pipeline
 
 """
 
@@ -325,7 +325,8 @@ def main():
             read_input = args.read2
         
         # Execute processing steps
-        if args is not None :
+        if args.steps is not None :
+            print('Running')
             if args.steps in [12, 123]:
                 processed_reads = process_reads(
                     read_input, sample_dir,
@@ -339,6 +340,7 @@ def main():
                 analyze_deletions(bam_file, args.raw_seq.upper(), 
                                 args.gRNA.upper(), args.sample_name, sample_dir)
         else:
+            print('Running all steps')
             processed_reads = process_reads(read_input, sample_dir,)
             build_star_index(args.raw_seq.upper(), sample_dir)
             bam_file = run_star_alignment(processed_reads, sample_dir, sample_dir, args.threads)
