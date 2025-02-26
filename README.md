@@ -21,26 +21,42 @@ Key features:
 ### Core Requirements
 - Python 3.8+
 - Cutadapt (v3.7)
-- seqkit (v2.3.0)
 - STAR (v2.7.10a)
 
 ## 🚀 Quick Start
-### Input Files
+
+pleace check the configuration for external tool paths first
 1. Paired-end FASTQ files
 2. Reference sequence (DNA)
-3. Guide RNA sequence
+3. Guide RNA sequence without bulge loop
 
 ### Basic Usage
 ```bash
-python scissor_pipeline.py \
-  --sample_name TEST01 \
-  --read1 sample_R1.fastq \
-  --read2 sample_R2.fastq \
-  --raw_seq "ATGCGTA...TACGCTA" \
-  --gRNA "GAGCTCG...AAACGGT" \
-  --work_dir ./analysis \
-  --threads 8
+# After confirming the paths of each software in the python file
+python scissor_call_deletion.py \
+      --sample {sample} \
+      --read1 {Path}/{sample}/{sample}_raw_1.fq.gz \
+      --read2 {Path}/{sample}/{sample}_raw_2.fq.gz \
+      --raw_seq {target_seq}\
+      --gRNA {gRNA_seq} \
+      --threads 10 \
+      --target_in_read1 {if_target_in_read1} "
 ```
+### Command Line Options
+| Parameter          | Required | Description                          |
+|---------------------|----------|--------------------------------------|
+| `--sample_name`     | Yes      | Unique experiment identifier        |
+| `--read1`           | Yes      | Path to Read 1 FASTQ file           |
+| `--read2`           | Yes      | Path to Read 2 FASTQ file           |
+| `--raw_seq`         | Yes      | Reference DNA sequence    |
+| `--gRNA`            | Yes      | Guide RNA sequence    |
+| `--target_in_read1` | Yes      | Target strand in Read1 (True/False) |
+| `--work_dir`        | No       | Output directory (default: current) |
+| `--threads`         | No       | CPU threads (default: 5)           |
+| `--steps`           | No       | Pipeline steps (1=index, 2=process, 3=align, 4=analyze) |
+
+
+
 
 ### Pipeline Steps
 1. **Adapter Processing**  
@@ -56,6 +72,10 @@ python scissor_pipeline.py \
 
 4. **Deletion Analysis**  
    Characterize deletion patterns and frameshift mutations
+
+
+
+   
 
 ## 📄 Output Files
 | File | Description |
@@ -80,3 +100,15 @@ Yuanfan Sun - sunyf36@mail2.sysu.edu.cn
 
 *Developed by Zhang Lab @ Sun Yat-Sen University*  
 *Guangzhou, China | 2025*
+
+
+
+
+
+
+
+
+
+
+
+
