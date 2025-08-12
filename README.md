@@ -93,7 +93,6 @@ Sun, Y. et al. Type III CRISPR-mediated flexible RNA excision with engineered gu
 
 ## 📧 Contact
 For technical support or scientific collaboration:  
-Rui Zhang - zhangrui3@mail.sysu.edu.cn  
 Yuanfan Sun - sunyf36@mail2.sysu.edu.cn
 
 ---
