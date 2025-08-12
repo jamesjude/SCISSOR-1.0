@@ -1,7 +1,7 @@
 """
 Author: YF Sun
 Date: 2024-06-05
-Description: CRISPR Sequence Mapping and Deletion Analysis Pipeline
+Description: SCISSOR Sequence Data Mapping and Deletion Analysis Pipeline
 
 """
 
